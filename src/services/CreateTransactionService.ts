@@ -20,10 +20,8 @@ class CreateTransactionService {
     }
     const { total } = this.transactionsRepository.getBalance();
 
-    if (type === 'outcome') {
-      if (value > total) {
-        throw new Error('The transaction faild');
-      }
+    if (type === 'outcome' && value > total) {
+      throw new Error('The transaction faild');
     }
 
     const transaction = this.transactionsRepository.create({
